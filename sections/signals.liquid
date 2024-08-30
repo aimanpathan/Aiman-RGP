@@ -1,0 +1,150 @@
+<style>
+    .signals-section {
+    background-color: #fff;
+    padding: 20px 0;
+}
+.signals-section .signals-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.signals-section .signals_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+.signals-section .signal {
+    display: flex;
+    align-items: center;
+    background-color: #fbfbfd;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.signals-section .signals-module {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.signals-section .signals-module img {
+    flex-shrink: 0;
+}
+
+.signals-section .signals-module p {
+    margin: 0;
+}
+
+.signal-image {
+    flex: 0 0 20%;
+}
+
+.signal-content {
+    flex: 0 0 80%;
+}
+
+.signal-image img {
+    width: 100%;
+    height: auto;
+}
+
+.signals-section {
+    background-image: url('{{ section.settings.background_image | img_url }}'), url('{{ section.settings.background_image | img_url }}');
+    background-position: left top, right bottom;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 250px;
+}
+
+
+/* Desktop layout */
+@media (min-width: 768px) {
+    .signals-section .signal {
+        margin: 10px;
+        max-width: 420px;
+        flex: 0 0 calc(33.33% - 20px);
+    }
+}
+
+/* Mobile layout */
+@media (max-width: 767px) {
+    .signals-section .signal {
+        flex: 1 1 100%;
+        margin: 10px 0;
+    }
+    .signals-section{
+        background-image: none;
+    }
+}
+
+</style>
+
+<section class="signals-section">
+    <div class="page-width">
+        <div class="signals-header">
+            <h2>{{ section.settings.title }}</h2>
+            <p>{{ section.settings.description }}</p>
+        </div>
+        <div class="signals_container">
+            {% for block in section.blocks %}
+                <div class="signal">
+                    <div class="signals-module">
+                        <div class="signal-image">
+                            {{ block.settings.image | image_url: width: '100px' | image_tag }}
+                        </div>
+                        <div class="signal-content">
+                            {{ block.settings.text }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+    "name": "Signals Section",
+    "settings": [
+        {
+            "type": "text",
+            "label": "Title",
+            "id": "title"
+        },
+        {
+            "type": "textarea",
+            "label": "Description",
+            "id": "description"
+        },
+        {
+            "type": "image_picker",
+            "label": "Background Image",
+            "id": "background_image"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "signals_section",
+            "name": "Signals Module",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "label": "Image",
+                    "id": "image"
+                },
+                {
+                    "type": "richtext",
+                    "label": "Text",
+                    "id": "text"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Signals Section",
+            "category": "Custom"
+        }
+    ]
+}
+{% endschema %}

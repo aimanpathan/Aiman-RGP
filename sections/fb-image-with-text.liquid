@@ -1,0 +1,60 @@
+
+<div class="page-width">
+    <div class="custom-image-with-text">
+        <div class="image-container">
+            {{ section.settings.image | image_url: width: '300px' | image_tag }}
+        </div>
+        <div class="text-container">
+            <h2>{{ section.settings.title }}</h2>
+            <p>{{ section.settings.description }}</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .custom-image-with-text {
+        display: flex;
+        flex-direction: row;
+        background: #FBFCFB;
+        margin: 50px;
+        gap: 50px;
+        padding: 50px;
+    }
+
+    @media (max-width: 767px) {
+        .custom-image-with-text {
+            flex-direction: column;
+            margin: 30px 0;
+             padding: 20px;
+             align-items: center;
+        }
+    }
+</style>
+{% schema %}
+    {
+        "name": "Image with Text",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "textarea",
+                "id": "description",
+                "label": "Description"
+            }
+        ],
+        "presets": [
+            {
+                "name": "Image with Text",
+                "category": "Custom"
+            }
+        ]
+    }
+    {% endschema %}

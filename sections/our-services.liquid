@@ -1,0 +1,107 @@
+<style>
+
+    .our-services {
+        background: #FBFCFB;
+        margin: 50px;
+        padding: 50px;
+    }
+
+    .our-services__content {
+        display: flex;
+        flex-direction: row;
+        gap: 50px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .our-services__image img {
+        width: 100%;
+        height: auto;
+    }
+
+    .our-services__content-body {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .section-header {
+        text-align: center;
+    }
+
+    @media (max-width: 767px) {
+        .our-services {
+            margin: 30px 0;
+            padding: 20px;
+        }
+
+        .our-services__content {
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .our-services__image img {
+            width: 100%;
+        }
+
+        .our-services__content-body {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .section-header {
+            text-align: center;
+        }
+    }
+</style>
+
+
+<div class="our-services page-width">
+    <div class="section-header">
+        <h1>{{ section.settings.section_header }}</h1>
+        <p>{{ section.settings.section_description }}</p>
+    </div>
+    <div class="our-services__content">
+        <div class="our-services__image">
+            {{ section.settings.section_image |  image_url: width: '500px' | image_tag }}
+        </div>
+        <div class="our-services__content-body">
+            {{ section.settings.section_content }}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+    {
+        "name": "Our Services",
+        "settings": [
+            {
+                "type": "text",
+                "id": "section_header",
+                "label": "Section Header"
+            },
+            {
+                "type": "richtext",
+                "id": "section_description",
+                "label": "Section Description"
+            },
+            {
+                "type": "image_picker",
+                "id": "section_image",
+                "label": "Section Image"
+            },
+            {
+                "type": "richtext",
+                "id": "section_content",
+                "label": "Section Content"
+            }
+        ],
+        "presets": [
+            {
+                "name": "Our Services",
+                "category": "Custom"
+            }
+        ]
+    }
+    {% endschema %}
